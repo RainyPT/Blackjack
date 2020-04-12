@@ -30,7 +30,7 @@
                 alert("Não pode apostar mais");
             }
             else {
-                playerbet = playerbet+PlayerMoney;
+                playerbet = playerbet + PlayerMoney;
                 PlayerMoney = 0;
                 document.getElementById("playermoney").innerHTML = "Créditos:" + PlayerMoney + "€";
                 document.getElementById("playerbetText").innerHTML = "Aposta:" + playerbet + "€";
@@ -45,6 +45,7 @@
 
             for (var x = 1; x < 4; x++) {
                 var carta = Math.floor(Math.random() * 11) + 1;
+                var carta_Sub = Math.floor(Math.random() * 4) + 1;
                 var id;
                 switch (x) {
                     case 1:
@@ -58,7 +59,7 @@
                         break;
                 }
                 if (carta == 11 || carta == 1) {
-                    document.getElementById(id).src = "cartas/A.png";
+                    document.getElementById(id).src = "cartas/A" + "_" + carta_Sub + ".png";
                     if (x == 1) {
                         if (Casa_Total + 11 < 21) {
                             carta = 11;
@@ -82,7 +83,7 @@
                 }
                 else {
                     if (carta == 10) {
-                        var cartadez = Math.floor(Math.random() * 4) + 1;
+                        var cartadez = Math.floor(Math.random() * 16) + 1;
                         document.getElementById(id).src = "cartas/10_" + cartadez + ".png";
                         if (x == 1)
                             Casa_Total += carta;
@@ -90,7 +91,7 @@
                             Player_Total += carta;
                     }
                     else {
-                        document.getElementById(id).src = "cartas/" + carta + ".png";
+                        document.getElementById(id).src = "cartas/" + carta + "_" + carta_Sub + ".png";
                         if (x == 1)
                             Casa_Total += carta;
                         else
@@ -111,6 +112,7 @@
         }
         function mais1carta() {
             var carta = Math.floor(Math.random() * 11) + 1;
+            var carta_Sub = Math.floor(Math.random() * 4) + 1;
             var id;
             switch (count) {
                 case 1:
@@ -133,17 +135,17 @@
                         carta = 11;
                     Player_Total += carta;
                 }
-                document.getElementById(id).src = "cartas/A.png";
+                document.getElementById(id).src = "cartas/A" + "_" + carta_Sub + ".png";
                 document.getElementById(id).style.display = "inline";
             }
             else {
                 if (carta == 10) {
-                    var cartadez = Math.floor(Math.random() * 4) + 1;
+                    var cartadez = Math.floor(Math.random() * 16) + 1;
                     document.getElementById(id).src = "cartas/10_" + cartadez + ".png";
                     Player_Total += carta;
                 }
                 else {
-                    document.getElementById(id).src = "cartas/" + carta + ".png";
+                    document.getElementById(id).src = "cartas/" + carta + "_" + carta_Sub + ".png";
                     Player_Total += carta;
                 }
             }
@@ -168,6 +170,7 @@
             document.getElementById("mais1carta").style.display = "none";
             while (Casa_Total < Player_Total) {
                 var carta = Math.floor(Math.random() * 11) + 1;
+                var carta_Sub = Math.floor(Math.random() * 4) + 1;
                 var id;
                 switch (count_casa) {
                     case 1:
@@ -190,17 +193,17 @@
                             carta = 11;
                         Casa_Total += carta;
                     }
-                    document.getElementById(id).src = "cartas/A.png";
+                    document.getElementById(id).src = "cartas/A" + "_" + carta_Sub + ".png";
                     document.getElementById(id).style.display = "inline";
                 }
                 else {
                     if (carta == 10) {
-                        var cartadez = Math.floor(Math.random() * 4) + 1;
+                        var cartadez = Math.floor(Math.random() * 16) + 1;
                         document.getElementById(id).src = "cartas/10_" + cartadez + ".png";
                         Casa_Total += carta;
                     }
                     else {
-                        document.getElementById(id).src = "cartas/" + carta + ".png";
+                        document.getElementById(id).src = "cartas/" + carta + "_" + carta_Sub + ".png";
                         Casa_Total += carta;
                     }
                 }
@@ -263,27 +266,30 @@
     </script>
     <style>
         body {
-            background-color: gray;
-            background-repeat: no-repeat;
-            background-size: cover;
+            background-color: darkcyan;
+        }
+
+        #JogoDiv {
+            margin-top: 10vh;
+            margin-bottom: 10vh;
         }
 
         #FuncionalidadesDiv {
             background-color: white;
             padding: 10px;
+            margin-top: 20vh;
+            margin-bottom: 20vh;
         }
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <h1 style="color: black;text-align: center;">Blackjack</h1>
-            </div>
-        </div>
         <center>
-            <div class="row">
+            <h1 style="color:black">WhiteJack</h1>
+        </center>
+        <center>
+            <div class="row" id="JogoDiv">
                 <div class="col-sm-5" style="margin: auto;padding:10px;">
                     <h1 style="color: black;"><u>Casa</u></h1>
                     <h3 style="color: black;" id="totalcasatext">0</h3>
@@ -294,17 +300,17 @@
                 </div>
 
                 <div class="col-sm-2" id="FuncionalidadesDiv">
-                    <h1 style="color: black;" id="playermoney">Créditos:2500€</h1>
+                    <h2 style="color: black;" id="playermoney">Créditos:2500€</h2>
                     <h3 style="color: black;" id="playerbetText">Aposta:0€</h3>
                     <button id="aposta100" onclick="apostar100()">Apostar 100€</button>
                     <button id="apostaAllIn" onclick="AllIn()">ALL IN</button>
                     <hr>
-                    <button style="margin-right: 10px;width: 100%;" id="inicio" onclick="Inicio()"
+                    <button style="margin-right: 10px;width: 100%;height:50px;" id="inicio" onclick="Inicio()"
                         class="btn btn-success">Iniciar</button>
-                    <button style="margin-right: 10px;margin-left: 10px;display: none;" id="mais1carta"
-                        onclick="mais1carta()" class="btn btn-light">+1
+                    <button style="width: 50%;height:50px;display: none;" id="mais1carta" onclick="mais1carta()"
+                        class="btn btn-light">+1
                         carta</button>
-                    <button style="margin-left: 10px;display: none;" id="parar" onclick="AcabarTurno()"
+                    <button style="width: 50%;height:50px;display: none;float:right" id="parar" onclick="AcabarTurno()"
                         class="btn btn-danger">Parar</button>
                     <h1 id="resultado"></h1>
                     <button id="resetbt" class="btn btn-warning" onclick="Reset()" style="display: none;">RESET</button>
