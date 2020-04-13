@@ -1,0 +1,140 @@
+<html>
+
+<head>
+    <title>Rock Paper Scissors</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        var PlayerMoney=2500;
+        function Pedra() {
+            Inicio(1);
+        }
+        function Tesoura() {
+            Inicio(2);
+        }
+        function Papel() {
+            Inicio(3);
+        }
+        function Inicio(pick_player) {
+            var pick_House = Math.floor(Math.random() * 3) + 1;
+
+            if (pick_House) {
+                switch (pick_House) {
+                    case 1:
+                        document.getElementById("escolhacasa").src = "PPT/stone.png";
+                        break;
+                    case 2:
+                        document.getElementById("escolhacasa").src = "PPT/scissors.png";
+                        break;
+                    case 3:
+                        document.getElementById("escolhacasa").src = "PPT/paper.png";
+                        break;
+                }
+            }
+
+            if (pick_player) {
+                switch (pick_player) {
+                    case 1:
+                        document.getElementById("escolhaplayer").src = "PPT/stone.png";
+                        break;
+                    case 2:
+                        document.getElementById("escolhaplayer").src = "PPT/scissors.png";
+                        break;
+                    case 3:
+                        document.getElementById("escolhaplayer").src = "PPT/paper.png";
+                        break;
+                }
+            }
+
+            if (pick_House == pick_player) {
+                document.getElementById("resultado").innerHTML = "Empate!";
+                PlayerMoney += playerbet;
+                document.getElementById("playermoney").innerHTML = "Créditos:" + PlayerMoney + "€";
+                document.getElementById("playerbetText").innerHTML = "Aposta:" + playerbet + "€";
+            }
+            else {
+                if (pick_player == 1 && pick_House == 2 || pick_player == 2 && pick_House == 3 || pick_player == 3 && pick_House == 1) {
+                    document.getElementById("resultado").innerHTML = "Ganhaste!";
+                    PlayerMoney += playerbet * 2;
+                    document.getElementById("playermoney").innerHTML = "Créditos:" + PlayerMoney + "€";
+                    document.getElementById("playerbetText").innerHTML = "Aposta:" + playerbet + "€";
+                    document.getElementById("FuncionalidadesDiv").style.backgroundColor = "green";
+                }
+                else {
+                    document.getElementById("resultado").innerHTML = "Perdeste!";
+                    document.getElementById("playermoney").innerHTML = "Créditos:" + PlayerMoney + "€";
+                    document.getElementById("playerbetText").innerHTML = "Aposta:" + playerbet + "€";
+                    document.getElementById("FuncionalidadesDiv").style.backgroundColor = "Red";
+                }
+            }
+
+        }
+    </script>
+    <style>
+        body {
+            background-color: darkcyan;
+        }
+
+        #FuncionalidadesDiv {
+            background-color: white;
+            padding: 10px;
+            margin-top: 10vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row" id="JogoDiv">
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">JRainyCasino</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="index.html">BlackJack</a></li>
+                        <li class="active"><a href="rockpaperscissors.html">Pedra Papel Tesoura</a></li>
+                        <li><a href="crash.html">Crash</a></li>
+                        <li><a href="rouleta.html">Rouleta</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a style="color: black;font-size: medium;"><b id="playermoney">Créditos:2500€</b></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <center>
+                <div class="col-sm-5" style="margin: auto;padding:10px;">
+                    <h1 style="color: black;"><u>Casa</u></h1>
+                    <img src="PPT/hidden.png" id="escolhacasa" style="width: 200px;"></img>
+                </div>
+
+                <div class="col-sm-2" id="FuncionalidadesDiv" style="border-radius: 25px;">
+                    <h4 style="color: black;" id="playerbettext">Aposta:0€</h4>
+                    <button id="aposta100" onclick="apostar100()">Apostar 100€</button>
+                    <button id="apostaAllIn" onclick="AllIn()">ALL IN</button>
+                    <hr>
+                    <button style="height:50px;float:left;background-color:maroon;color:white" id="Pedra"
+                        onclick="Pedra()" class="btn">Pedra</button>
+                    <button style="height:50px;background-color: gray;color:white" id="Papel" onclick="Papel()"
+                        class="btn">Papel</button>
+                    <button style="height:50px;float:right;background-color: blue;color:white" id="Tesoura"
+                        onclick="Tesoura()" class="btn">Tesoura</button>
+                    <h1 id="resultado"></h1>
+                    <button id="resetbt" class="btn btn-warning" onclick="Reset()" style="display: none;">RESET</button>
+                </div>
+
+                <div class="col-sm-5" style="margin: auto;padding:10px;">
+                    <h1 style="color: black;"><u>Tu</u></h1>
+                    <img src="PPT/hidden.png" id="escolhaplayer" style="width: 200px;"></img>
+                </div>
+            </center>
+        </div>
+    </div>
+</body>
+
+</html>
