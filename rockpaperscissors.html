@@ -7,8 +7,30 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="Storage.js"></script>
     <script>
-        var PlayerMoney=2500;
+        function apostar100() {
+            if (PlayerMoney <= 0) {
+                alert("Não pode apostar mais");
+            }
+            else {
+                playerbet += 100;
+                PlayerMoney -= 100;
+                document.getElementById("playermoney").innerHTML = "Créditos:" + PlayerMoney + "€";
+                document.getElementById("playerbetText").innerHTML = "Aposta:" + playerbet + "€";
+            }
+        }
+        function AllIn() {
+            if (PlayerMoney <= 0) {
+                alert("Não pode apostar mais");
+            }
+            else {
+                playerbet = playerbet + PlayerMoney;
+                PlayerMoney = 0;
+                document.getElementById("playermoney").innerHTML = "Créditos:" + PlayerMoney + "€";
+                document.getElementById("playerbetText").innerHTML = "Aposta:" + playerbet + "€";
+            }
+        }
         function Pedra() {
             Inicio(1);
         }
@@ -53,19 +75,22 @@
                 document.getElementById("resultado").innerHTML = "Empate!";
                 PlayerMoney += playerbet;
                 document.getElementById("playermoney").innerHTML = "Créditos:" + PlayerMoney + "€";
+                playerbet=0;
                 document.getElementById("playerbetText").innerHTML = "Aposta:" + playerbet + "€";
             }
             else {
                 if (pick_player == 1 && pick_House == 2 || pick_player == 2 && pick_House == 3 || pick_player == 3 && pick_House == 1) {
                     document.getElementById("resultado").innerHTML = "Ganhaste!";
-                    PlayerMoney += playerbet * 2;
+                    PlayerMoney += playerbet * 3;
                     document.getElementById("playermoney").innerHTML = "Créditos:" + PlayerMoney + "€";
+                    playerbet=0;
                     document.getElementById("playerbetText").innerHTML = "Aposta:" + playerbet + "€";
                     document.getElementById("FuncionalidadesDiv").style.backgroundColor = "green";
                 }
                 else {
                     document.getElementById("resultado").innerHTML = "Perdeste!";
                     document.getElementById("playermoney").innerHTML = "Créditos:" + PlayerMoney + "€";
+                    playerbet=0;
                     document.getElementById("playerbetText").innerHTML = "Aposta:" + playerbet + "€";
                     document.getElementById("FuncionalidadesDiv").style.backgroundColor = "Red";
                 }
@@ -114,7 +139,7 @@
                 </div>
 
                 <div class="col-sm-2" id="FuncionalidadesDiv" style="border-radius: 25px;">
-                    <h4 style="color: black;" id="playerbettext">Aposta:0€</h4>
+                    <h4 style="color: black;" id="playerbetText">Aposta:0€</h4>
                     <button id="aposta100" onclick="apostar100()">Apostar 100€</button>
                     <button id="apostaAllIn" onclick="AllIn()">ALL IN</button>
                     <hr>
@@ -132,6 +157,22 @@
                     <h1 style="color: black;"><u>Tu</u></h1>
                     <img src="PPT/hidden.png" id="escolhaplayer" style="width: 200px;"></img>
                 </div>
+            </center>
+        </div>
+        <hr>
+        <div class="row" id="CommentingRow">
+            <div class="form-group" style="margin: 10px;">
+                <label>Username:</label>
+                <input type="text" class="form-control" id="username" placeholder="Utilizador123">
+                <label>Comentario:</label>
+                <textarea class="form-control" style="resize: none;" rows="3"
+                    placeholder="Ganda merda de jogo boy, mata-te" id="comment"></textarea><br>
+                <button id="Manda_Msg" class="btn">Enviar</button>
+            </div>
+        </div>
+        <div class="row" id="CommentsRow">
+            <center>
+                <h2>Comentários:</h2>
             </center>
         </div>
     </div>
