@@ -98,6 +98,8 @@
 
         }
     </script>
+    <script src="commentsDB.js"></script>
+    <script src="comment-handler.js"></script>
     <style>
         body {
             background-color: darkcyan;
@@ -161,21 +163,34 @@
         </div>
         <hr>
         <div class="row" id="CommentingRow">
-            <div class="form-group" style="margin: 10px;">
-                <label>Username:</label>
-                <input type="text" class="form-control" id="username" placeholder="Utilizador123">
-                <label>Comentario:</label>
-                <textarea class="form-control" style="resize: none;" rows="3"
-                    placeholder="Ganda merda de jogo boy" id="comment"></textarea><br>
-                <button id="Manda_Msg" class="btn">Enviar</button>
+                <div class="form-group" style="margin: 10px;">
+                    <label>Username:</label>
+                    <input id="addCommentUser"
+                        type="text"
+                        class="form-control"
+                        id="username"
+                        placeholder="Utilizador123"
+                    />
+                    <label>Comentario:</label>
+                    <textarea id="addCommentCmt"
+                        class="form-control"
+                        style="resize: none;"
+                        rows="3"
+                        placeholder="Ganda merda de jogo boy"
+                        id="comment"
+                    ></textarea
+                    ><br />
+                    <button id="Manda_Msg" class="btn" onclick="addComment()">Enviar</button>
+                </div>
             </div>
-        </div>
         <div class="row" id="CommentsRow">
             <center>
                 <h2>Comentários:</h2>
+                <div id="commentsDiv"></div>
+                <div id="cmtBag"></div>
             </center>
         </div>
     </div>
 </body>
-
+<script>loadComments()</script>
 </html>
